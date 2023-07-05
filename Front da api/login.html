@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 16px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #357ae8;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login</h1>
+    
+    <form id="loginForm">
+      <label for="username">Usuário:</label>
+      <input type="text" id="username" name="username" required><br><br>
+      
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required><br><br>
+      
+      <input type="submit" value="Login">
+    </form>
+  </div>
+  
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    // Obtenha a referência do formulário
+    const form = document.getElementById('loginForm');
+    
+    // Defina o manipulador de eventos para o envio do formulário
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault(); // Impede o envio padrão do formulário
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      const loginData = {
+        login: username,
+        password: password
+      };
+      
+      try {
+        const response = await axios.post('http://localhost:8080/login', loginData);
+        const token = response.data; // Obtém o token do corpo da resposta
+        
+        // Faça algo com o token retornado, como armazená-lo no local storage
+        localStorage.setItem('token', token);
+        
+        // Redirecione para a próxima página ou faça outras ações necessárias
+        window.location.href = 'produto.html'; // Exemplo de redirecionamento para a página de produto
+      } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        // Lide com o erro de autenticação aqui
+      }
+    });
+  </script>
+</body>
+</html>
