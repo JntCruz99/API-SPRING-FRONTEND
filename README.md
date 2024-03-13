@@ -6,7 +6,7 @@ Esta API oferece endpoints para autenticação de usuários e geração de token
 
 ### Login
 
-####POST /login
+#### POST /login
 
 
 Este endpoint permite que um usuário faça login e receba um token de acesso.
@@ -29,13 +29,13 @@ Exemplo de corpo da requisição:
 Resposta
 Se as credenciais estiverem corretas, o endpoint retornará um token de acesso.
 
-###Exemplo de resposta:
+### Exemplo de resposta:
 ```json
 {
     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJleGFtcGxlX3VzdWFyaW8iLCJpYXQiOjE2MTY5MzYwNjAsImV4cCI6MTYxNjkzNzg2MH0.5jSvPdRzqN-05tN8zBNutXJZtq30lJi-VX_RhDX_Tx0"
 }
 ````
-###Exemplo de Uso
+### Exemplo de Uso
 curl -X POST http://localhost:8080/login \
     -H "Content-Type: application/json" \
     -d '{"login": "exemplo_usuario", "password": "exemplo_senha"}'
